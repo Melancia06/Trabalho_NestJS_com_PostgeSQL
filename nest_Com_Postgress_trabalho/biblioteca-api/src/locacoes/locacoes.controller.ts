@@ -1,4 +1,4 @@
-import {Controller,Get,Param,ParseIntPipe,} from '@nestjs/common';
+import {Controller,Get,Param,ParseIntPipe,HttpCode,HttpStatus,Delete} from '@nestjs/common';
 import { Locacao } from './locacao';
 import { LocacoesService } from './locacoes.service';
 import type { AtualizarLocacaoDto, CriarLocacaoDto } from './locacoes.service';
@@ -15,6 +15,11 @@ export class LocacoesController {
   @Get(':id')
   buscar(@Param('id', ParseIntPipe) id: number): Promise<Locacao> {
     return this.locacoesService.buscar(id);
+  }
+   @Delete(":id")
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remover(@Param("id", ParseIntPipe) id: number): Promise<void> {
+    return this.locacoesService.remover(id);
   }
 
 }

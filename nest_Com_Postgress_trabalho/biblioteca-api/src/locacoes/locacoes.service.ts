@@ -41,5 +41,11 @@ export class LocacoesService {
     }
     return locacao;
   }
+   async remover(id: number): Promise<void> {
+    const resultado = await this.repositorio.delete(id);
+    if (!resultado.affected) {
+      throw new NotFoundException(`Locação ${id} não existe`);
+    }
+  }
 
 }
